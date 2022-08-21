@@ -13,6 +13,7 @@ const classroomRoute = require('./routes/classroom');
 
 const feedRoute = require('./routes/feed');
 
+const port = (process.env.PORT || 3000);
 dotenv.config();
 
 
@@ -31,4 +32,4 @@ app.use('/api/classroom', classroomRoute);
 
 app.use('/api/feed', feedRoute);
 
-app.listen(3000, () => console.log("Server is up running..."))
+app.listen(port, () => console.log("Server is up running... " +port));
