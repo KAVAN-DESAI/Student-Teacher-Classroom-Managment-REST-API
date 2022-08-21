@@ -28,7 +28,7 @@ router.get('',async (req,res)=>{
             },
         },
 
-    });
+    }).pretty();
 })
 
 module.exports = router;
