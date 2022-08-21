@@ -1,20 +1,16 @@
-const express = require("express");
 const multer = require("multer");
-const fs = require("fs");
+const fileSystem = require("fs");
 
-// constant
-const storage = multer.diskStorage({
+const storeFile = multer.diskStorage({
   destination: (req, file, callback) => {
-    console.log("upload");
-    console.log(req);
-    const dir = "uploads/";
-    !fs.existsSync(dir) && fs.mkdirSync(dir);
+    const localDir = "uploads/";
+    !fileSystem.existsSync(localDir) && fileSystem.mkdirSync(localDir);
     callback(null, "uploads/");
   },
   filename: (req, file, callback) => {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    let ext = file.originalname.lastIndexOf(".");
-    ext = file.originalname.substr(ext + 1);
-    callback(null, `${file.fieldname}-${uniqueSuffix}.${ext}`);
+    const suffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    let fileExtension = file.originalname.lastIndexOf(".");
+    fileExtension = file.originalname.substr(fileExtension + 1);
+    callback(null, `${file.fieldname}-${suffix}.${fileExtension}`);
   },
 });

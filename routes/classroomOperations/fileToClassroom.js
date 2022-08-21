@@ -5,6 +5,10 @@ exports.uploadFile = (async (req, res) => {
     //checkin if user is not student
     if (req.user.userType == "student") return res.status(400).send("Access Denied");
 
+
+    const classroomExist = await classroomModel.findOne({ name: req.body.classroomName });
+    if (!classroomExist) return res.status(400).send("classroom not found");
+
     // Find classroom byy name and update it with the request body
     const query = { name: req.body.classroomName };
     const updateDocument = {
@@ -25,7 +29,6 @@ exports.delete = (req, res) => {
 
     //checkin if user is not student
     if (req.user.userType == "student") return res.status(400).send("Access Denied");
-    console.log(req.body);
 
     classroomModel.findOne({ name: req.body.classroomName })
         .then(async classroom => {
@@ -41,7 +44,6 @@ exports.delete = (req, res) => {
             const savedClassroom = await classroom.save();
             res.send({ message: "File deleted successfully from class " + req.body.classroomName });
         }).catch(err => {
-            console.log(err);
             if (err.kind === 'ObjectId' || err.name === 'NotFound') {
                 return res.status(404).send({
                     message: "File not found with name " + req.body.fileName
@@ -61,8 +63,6 @@ exports.update = (req, res) => {
 
     classroomModel.findOne({ name: req.body.classroomName })
         .then(async classroom => {
-            console.log(req);
-            console.log(req.file);
             var fileIndex = classroom.resources.findIndex(x => x.originalname === req.body.updateFileName);
             if (fileIndex >= 0 && classroom.resources[fileIndex].originalname == req.body.updateFileName) {
                 var file = classroom.resources.splice(fileIndex, 1, req.file);
@@ -75,7 +75,6 @@ exports.update = (req, res) => {
             const savedClassroom = await classroom.save();
             res.send({ message: "File updated successfully in class " + req.body.classroomName });
         }).catch(err => {
-            console.log(err);
             if (err.kind === 'ObjectId' || err.name === 'NotFound') {
                 return res.status(404).send({
                     message: "File not found with name " + req.body.updateFileName
@@ -96,16 +95,14 @@ exports.rename = async (req, res) => {
     if (req.user.userType == "student") return res.status(400).send("Access Denied");
 
     // Find classroom byy name and update it with the request body
-    const query = { name : req.body.classroomName};
+    const query = { name: req.body.classroomName };
     const updateDocument = {
-        $set: { resources: [{originalname : {$eq : ["$originalname", req.body.fileName],then : req.body.updatedFileName} }]}
+        $set: { resources: [{ originalname: { $eq: ["$originalname", req.body.fileName], then: req.body.updatedFileName } }] }
     };
 
-    const updatedClassroom = await classroomModel.findOneAndUpdate(query, updateDocument,{upsert: true,});
+    const updatedClassroom = await classroomModel.findOneAndUpdate(query, updateDocument, { upsert: true, });
 
-    try {        
-        console.log(query);
-        console.log(updatedClassroom);
+    try {
         res.send({ message: "File name updated successfully to " + req.body.updatedFileName });
     } catch (err) {
         res.status(400).send(err);

@@ -38,24 +38,24 @@ exports.classesFeed = async (req, res) => {
 
 exports.filesFeed = async (req, res) => {
 
-    const classroom = classroomModel.find({name: req.body.classroomName})
+    const classroom = classroomModel.find({ name: req.body.classroomName })
         .then(classroom => {
-            if (classroom.length==0) {
+            if (classroom.length == 0) {
                 return res.status(400).send("No classroom found");
             }
-            else if(classroom[0].resources.length == 0){
+            else if (classroom[0].resources.length == 0) {
                 return res.status(400).send("No files uploaded");
             }
-            if(req.body.fileType=="all"){
+            if (req.body.fileType == "all") {
                 return res.send(classroom[0].resources);
-            }            
-            var filteredResource=[]
+            }
+            var filteredResource = []
             classroom[0].resources.forEach((resource) => {
-                if(resource.mimetype.substring(0,Math.min(req.body.fileType.length,resource.mimetype.length))==req.body.fileType){
+                if (resource.mimetype.substring(0, Math.min(req.body.fileType.length, resource.mimetype.length)) == req.body.fileType) {
                     filteredResource.push(resource);
                 }
             });
-            if(filteredResource.length==0){
+            if (filteredResource.length == 0) {
                 return res.status(400).send("File not found");
             }
             res.send(filteredResource);
@@ -68,21 +68,21 @@ exports.filesFeed = async (req, res) => {
 
 exports.filesFeedSearchByName = async (req, res) => {
 
-    const classroom = classroomModel.find({name: req.body.classroomName})
+    const classroom = classroomModel.find({ name: req.body.classroomName })
         .then(classroom => {
-            if (classroom.length==0) {
+            if (classroom.length == 0) {
                 return res.status(400).send("No classroom found");
             }
-            else if(classroom[0].resources.length == 0){
+            else if (classroom[0].resources.length == 0) {
                 return res.status(400).send("No files uploaded");
             }
-            var filteredResource=[]
+            var filteredResource = []
             classroom[0].resources.forEach((resource) => {
-                if(resource.originalname==req.body.fileName){
+                if (resource.originalname == req.body.fileName) {
                     filteredResource.push(resource);
                 }
             });
-            if(filteredResource.length==0){
+            if (filteredResource.length == 0) {
                 return res.status(400).send("File not found");
             }
             res.send(filteredResource);
@@ -93,7 +93,7 @@ exports.filesFeedSearchByName = async (req, res) => {
         });
 };
 
-// audio 
+// audio
 // image
 // application
 // video

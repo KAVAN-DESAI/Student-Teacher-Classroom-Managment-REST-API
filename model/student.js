@@ -1,23 +1,23 @@
-const mongoose =require('mongoose');
+const mongoose = require('mongoose');
 
 const studentSchema = new mongoose.Schema({
     name: {
-        type : String,
+        type: String,
         required: true,
-        min : 6,
+        min: 6,
         max: 255
     },
     email: {
-        type : String,
+        type: String,
         required: true,
         max: 255,
         min: 6
     },
-    password:{
-        type : String,
+    password: {
+        type: String,
         required: true,
-        max:1024,
-        min:6
+        max: 1024,
+        min: 6
     },
     userType: {
         type: String,
@@ -27,9 +27,9 @@ const studentSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    classesEnrolled:{
+    classesEnrolled: {
         type: Array,
-        default:[],
+        default: [],
     },
     date: {
         type: Date,

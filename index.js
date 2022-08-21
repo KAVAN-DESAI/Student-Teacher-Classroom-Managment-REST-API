@@ -18,7 +18,7 @@ dotenv.config();
 
 
 //Connect to DB
-mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true}, () => console.log("Connected to mongo DB!"))
+mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true }, () => console.log("Connected to mongo DB!"))
 
 //Middleware
 app.use(express.json());
@@ -32,4 +32,4 @@ app.use('/api/feed', feedRoute);
 
 app.use('', initRoute);
 
-app.listen(port, () => console.log("Server is up running... " +port));
+app.listen(port, () => console.log("Server is up running... " + port));

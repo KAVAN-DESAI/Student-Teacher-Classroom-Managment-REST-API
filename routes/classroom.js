@@ -9,7 +9,7 @@ const verify = require('../verifyToken');
 const getAllClassroom = require('./classroomOperations/getAllClassroom');
 const updateClassroom = require('./classroomOperations/updateClassroom');
 const deleteClassroom = require('./classroomOperations/deleteClassroom');
-const {storage} = require('../uploadFile');
+const {storeFile} = require('../uploadFile');
 const multer = require("multer");
 const fs = require("fs");
 const fileToClassroom = require('./classroomOperations/fileToClassroom');
@@ -54,7 +54,6 @@ router.post('/assign',verify, async (req,res)=>{
 
     //Checking if the classroom already exist
     var classroom =  await classroomModel.find({name: req.body.name});
-    console.log(classroom);
     var checkStudentIsAssied=classroom[0].students.includes(req.body.studentEmail);
     if(checkStudentIsAssied) return res.status(400).send("Student is already added in classroom");
 
@@ -64,8 +63,6 @@ router.post('/assign',verify, async (req,res)=>{
     if(!studentEmailExist) return res.status(400).send("Student not found");
 
     if(classroom[0].students.length>=parseInt(classroom[0].classroomCapacity)) return res.status(400).send("Classroom Capacity full");
-
-    console.log(req.body.studentEmail);
 
     const query = { name: req.body.name };
     const updateDocument = {
@@ -92,7 +89,7 @@ router.post('/update', verify, updateClassroom.update);
 // Delete a Note with noteId
 router.delete('/delete', verify, deleteClassroom.delete);
 
-const upload = multer({ storage });
+const upload = multer({ storeFile });
 
 router.post("/file/upload", verify ,upload.single("file"), fileToClassroom.uploadFile );
 

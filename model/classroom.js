@@ -2,25 +2,25 @@ const mongoose = require('mongoose');
 
 const classroomSchema = new mongoose.Schema({
     name: {
-        type : String,
+        type: String,
         required: true,
-        min : 6,
+        min: 6,
         max: 255
     },
-    classroomCapacity:{
-        type : String,
+    classroomCapacity: {
+        type: String,
         required: true,
     },
-    students:{
+    students: {
         type: Array,
         defauls: [],
     },
-    resources :{
+    resources: {
         type: Array,
         defauls: [],
     },
     createdBy: {
-        type : String,
+        type: String,
         required: true,
     },
     date: {

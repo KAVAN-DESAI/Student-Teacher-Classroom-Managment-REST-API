@@ -4,14 +4,14 @@ const classroomModel = require('../../model/classroom');
 
 exports.findAll = (req, res) => {
     //checkin if user is not student
-    if(req.user.userType=="student") return res.status(400).send("Access Denied");
+    if (req.user.userType == "student") return res.status(400).send("Access Denied");
 
     classroomModel.find()
-    .then(classroom => {
-        res.send(classroom);
-    }).catch(err => {
-        res.status(500).send({
-            message: err.message || "Some error occurred while retrieving notes."
+        .then(classroom => {
+            res.send(classroom);
+        }).catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving notes."
+            });
         });
-    });
 };
