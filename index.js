@@ -32,6 +32,6 @@ app.use('/api/classroom', classroomRoute);
 
 app.use('/api/feed', feedRoute);
 
-app.use('/', initRoute);
+app.use('', initRoute);
 
 app.listen(port, () => console.log("Server is up running... " +port));
