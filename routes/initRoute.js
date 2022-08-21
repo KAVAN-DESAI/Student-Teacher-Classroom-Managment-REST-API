@@ -37,7 +37,7 @@ router.get('', async (req, res) => {
                 database: "MongoDB"
             }
         },
-        herokuFaliur: {
+        herokuFailure: {
             ifTrue: "try to check readme and run it locally! sorry for this",
             else: "Enjoy the API :)"
         }
