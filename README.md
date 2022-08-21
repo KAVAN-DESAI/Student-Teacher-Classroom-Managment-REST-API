@@ -69,7 +69,116 @@ npm start
 
 
 
+## Data Model
 
+- Here I have used embedded data model.
+
+1. student:
+```bash
+{
+  name: {
+      type : String,
+      required: true,
+      min : 6,
+      max: 255
+  },
+  email: {
+      type : String,
+      required: true,
+      max: 255,
+      min: 6
+  },
+  password:{
+      type : String,
+      required: true,
+      max:1024,
+      min:6
+  },
+  userType: {
+      type: String,
+      default: "student"
+  },
+  rollNumber: {
+      type: String,
+      required: true,
+  },
+  classesEnrolled:{
+      type: Array,
+      default:[],
+  },
+  date: {
+      type: Date,
+      default: Date.now
+  }
+}
+```
+
+2. teacher:
+```bash
+{
+  name: {
+      type : String,
+      required: true,
+      min : 6,
+      max: 255
+  },
+  email: {
+      type : String,
+      required: true,
+      max: 255,
+      min: 6
+  },
+  password:{
+      type : String,
+      required: true,
+      max:1024,
+      min:6
+  },
+  userType: {
+      type: String,
+      default: "teacher"
+  },
+  classTutor:{
+      type: Array,
+      default:[],
+  },
+  date: {
+      type: Date,
+      default: Date.now
+  }
+}
+```
+3. classroom:
+```bash
+{
+  name: {
+      type : String,
+      required: true,
+      min : 6,
+      max: 255
+  },
+  classroomCapacity:{
+      type : String,
+      required: true,
+  },
+  students:{
+      type: Array,
+      defauls: [],
+  },
+  resources :{
+      type: Array,
+      defauls: [],
+  },
+  createdBy: {
+      type : String,
+      required: true,
+  },
+  date: {
+      type: Date,
+      default: Date.now
+  }
+}
+```
 
 
 
