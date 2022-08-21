@@ -18,7 +18,7 @@ dotenv.config();
 
 
 //Connect to DB
-mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 }, () => console.log("Connected to mongo DB!"))
+mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true}, () => console.log("Connected to mongo DB!"))
 
 //Middleware
 app.use(express.json());
