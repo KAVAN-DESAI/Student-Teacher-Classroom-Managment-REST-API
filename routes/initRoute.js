@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 router.get('',async (req,res)=>{
-    res.json({
+    res.end(JSON.stringify({
         message: 'This is Kavan Desai Rest API Assignment',
         api: {
             Authentification:{
@@ -28,7 +28,8 @@ router.get('',async (req,res)=>{
             },
         },
 
-    }).pretty();
+    },null, "   ")
+    );
 })
 
 module.exports = router;
