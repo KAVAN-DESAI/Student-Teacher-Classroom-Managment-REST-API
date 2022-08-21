@@ -7,7 +7,7 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 //Import routes
 const authRoute = require('./routes/auth');
 
-const postRoute = require('./routes/posts');
+const initRoute = require('./routes/initRoute');
 
 const classroomRoute = require('./routes/classroom');
 
@@ -31,5 +31,7 @@ app.use('/api/posts', postRoute);
 app.use('/api/classroom', classroomRoute);
 
 app.use('/api/feed', feedRoute);
+
+app.use('/', initRoute);
 
 app.listen(port, () => console.log("Server is up running... " +port));
