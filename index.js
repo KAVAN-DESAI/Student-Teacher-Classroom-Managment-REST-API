@@ -26,8 +26,6 @@ app.use(express.json());
 //Route middleware
 app.use('/api/user', authRoute);
 
-app.use('/api/posts', postRoute);
-
 app.use('/api/classroom', classroomRoute);
 
 app.use('/api/feed', feedRoute);
