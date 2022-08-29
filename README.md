@@ -54,7 +54,6 @@
 
 ## Installation
 
-- Download the project using this drive link : - https://drive.google.com/drive/folders/1LRpUb2CzjwlDZzWNjCRdMDxMgYmMHNqV?usp=sharing
 - Open the terminal and input the Following commands in root dir(ensure to have node js installed)
 
 ```bash
@@ -63,7 +62,7 @@ npm start
 ```
 
 - to get all endpoints we need to call homepage API(using postman)
-1. open the postman and import the file [postman collection](https://drive.google.com/drive/folders/1Rw2awqvt7kfpnzzrehElJVof98D2T6kp?usp=sharing)
+1. open the postman and import the file postman collection
 2. got to Home collection and select homepage API and send the request
 3. we get a json response will all endpoints
 
