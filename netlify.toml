@@ -1,0 +1,3 @@
+[build]
+  command = "npm start"  # Adjust the start command as needed
+  functions = "functions"
